@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
-import Logon from './Logon'
+import AskList from './AskList'
 import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
   componentDidMount() {
-    console.log("HERE1")
     this.props.dispatch(handleInitialData())
   }
 
@@ -16,10 +15,11 @@ class App extends Component {
       <div className="App">
         <div className='container'>
           {this.props.loading === true
-          ? null 
+            ? null 
             : <div>
-                <Logon />
-              </div>}
+                <AskList user={this.props.users['sarahedo']} />
+              </div>
+          }
         </div>
 
       </div>
@@ -27,9 +27,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
     return {
-      loading: authedUser === null
+      loading: authedUser === null,
+      users
     }
   }
 

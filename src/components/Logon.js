@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+import logo from '../react.png';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownItem from 'react-bootstrap/DropdownItem';
 import DropdownMenu from 'react-bootstrap/DropdownMenu';
 import DropdownToggle from 'react-bootstrap/DropdownToggle';
 import Container from 'react-bootstrap/Container';
 import { connect } from 'react-redux'
+import { setAuthedUser } from '../actions/authedUser'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class Logon extends Component {
+  handleAuthUserSelected = (e, id) => {
+    e.preventDefault()
+    this.props.dispatch(setAuthedUser(id))
+  }
 
 
 
   render() {
-    const { usersIds } = this.props
+    const { users } = this.props
     return (
       <div className="App">
         <Container>
@@ -38,9 +43,20 @@ class Logon extends Component {
                 </DropdownToggle>
               
                 <DropdownMenu>
-                  {usersIds.map((user) => {
+                  {users.map((user) => {
+                    console.log("Avatar: " + user.avatarURL)
                     return(
-                      <DropdownItem key={user} href="#/action-1">{user}</DropdownItem>
+                      <DropdownItem id={user.id} key={user.id} onClick={(e)=>this.handleAuthUserSelected(e,user.id)}>
+                        <span>
+                          <img 
+                            src={user.avatarURL} 
+                            alt={`Avatar of ${user.id}`} 
+                            className='avatar'
+                            height="30" width="30"
+                            />
+                          {` ${user.name}`}
+                        </span>
+                      </DropdownItem>
                     )  
                   })}
                 </DropdownMenu>
@@ -55,7 +71,9 @@ class Logon extends Component {
 
 function mapStateToProps({users}) {
     return {
-        usersIds: Object.keys(users)
+        users: Object.keys(users).map((key) => {
+          return(users[key])})
+        
     }
 }
 
