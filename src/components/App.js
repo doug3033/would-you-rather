@@ -1,7 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import AskList from './AskList'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import LoadingBar from 'react-redux-loading'
+import NavWYR from './NavWYR'
+import Logon from './Logon'
+import Leader from './Leader'
+
 import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
@@ -11,26 +17,42 @@ class App extends Component {
 
 
   render() {
+    const { currentUser } = this.props
     return (
-      <div className="App">
-        <div className='container'>
-          {this.props.loading === true
-            ? null 
+      <Router>
+        <Fragment>
+          <LoadingBar />
+          <NavWYR />
+          <div className='container'>
+              {this.props.loading === true
+              ? null 
             : <div>
-                <AskList user={this.props.users['sarahedo']} />
-              </div>
-          }
-        </div>
+                <Route path="/" exact
+                  render={() => (
+                      currentUser ? 
+                      <AskList  user={this.props.users[currentUser]} />
+                      : <Logon />
+                    )}       
+                 />
+                <Route path='/new-question' />
+                <Route path='/leaderboard' render={({history}) => (
+                  currentUser ? <Leader /> : history.push('/')
+                )} />
 
-      </div>
+                <Route path='/logon' component={Logon} />
+              </div>}
+          </div>
+        </Fragment>
+      </Router>
     );
   }
 }
 
 function mapStateToProps({ authedUser, users }) {
     return {
-      loading: authedUser === null,
-      users
+      loading: users === null,
+      users,
+      currentUser : authedUser
     }
   }
 

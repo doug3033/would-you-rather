@@ -44,7 +44,6 @@ class Logon extends Component {
               
                 <DropdownMenu>
                   {users.map((user) => {
-                    console.log("Avatar: " + user.avatarURL)
                     return(
                       <DropdownItem id={user.id} key={user.id} onClick={(e)=>this.handleAuthUserSelected(e,user.id)}>
                         <span>
@@ -72,8 +71,7 @@ class Logon extends Component {
 function mapStateToProps({users}) {
     return {
         users: Object.keys(users).map((key) => {
-          return(users[key])})
-        
+          return(users[key])})       
     }
 }
 

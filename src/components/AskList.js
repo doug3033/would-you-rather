@@ -7,10 +7,13 @@ import Ask from './Ask'
 import 'bootstrap/dist/css/bootstrap.css';
 
 class AskList extends Component {
+
    
   render() {
-    const { answeredQuestionList, unansweredQuestionList, users } = this.props 
+    const { answeredQuestionList, unansweredQuestionList, users, user } = this.props
+    
     return(
+        user ? 
         <div>
             <Tabs defaultActiveKey="UnansweredQuestions">
                 <Tab eventKey="UnansweredQuestions" title="Unanswered Questions">
@@ -34,7 +37,7 @@ class AskList extends Component {
                     })}
                 </Tab>
             </Tabs>
-        </div>
+        </div> : null
     )
   }
 
@@ -43,13 +46,13 @@ class AskList extends Component {
 function mapStateToProps({questions, users}, {user}) {
     const answeredQuestionList = []
     const unansweredQuestionList = []
-    Object.keys(user.answers).forEach((key) => {
+    user && Object.keys(user.answers).forEach((key) => {
         answeredQuestionList.push(questions[key])
     })
-    Object.keys(questions).forEach((key) => {
+    questions && user && Object.keys(questions).forEach((key) => {
         if (!Object.keys(user.answers).includes(key)) {
             unansweredQuestionList.push(questions[key])
-        }
+        } 
     })
     return {
         answeredQuestionList,

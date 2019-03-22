@@ -23,6 +23,27 @@
   color: #61dafb;
 }
 
+.navbar-dark .navbar-nav .nav-link {
+  color: white;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+}
+
+.numberCircle {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background: #666;
+  border: 2px solid #666;
+  color: white;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+  box-align: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -30,4 +51,8 @@
   to {
     transform: rotate(360deg);
   }
+
+
+
+
 }
