@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import LoadingBar from 'react-redux-loading'
 import NavWYR from './NavWYR'
 import Logon from './Logon'
-import Leader from './Leader'
+import LeaderList from './LeaderList'
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -36,7 +36,7 @@ class App extends Component {
                  />
                 <Route path='/new-question' />
                 <Route path='/leaderboard' render={({history}) => (
-                  currentUser ? <Leader /> : history.push('/')
+                  currentUser ? <LeaderList /> : history.push('/')
                 )} />
 
                 <Route path='/logon' component={Logon} />

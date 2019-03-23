@@ -12,7 +12,7 @@ import '../App.css'
 class Leader extends Component {
    
   render() {
-    const { currentUser, answeredQuestionsList } = this.props 
+    const { currentUser, answerCount, questionCount, totalCount } = this.props 
     return(
         <div>
         <Container>
@@ -40,12 +40,12 @@ class Leader extends Component {
                 </Row>
                 <Row>
                     <Col>
-                        Answered Questions {answeredQuestionsList.length}<br/>
-                        Created Questions {currentUser.questions.length}
+                        Answered Questions {answerCount}<br/>
+                        Created Questions {questionCount}
                     </Col>
                     <Col>
                         <div className="numberCircle">
-                        {answeredQuestionsList.length + currentUser.questions.length}
+                        {totalCount}
                         </div>               
                     </Col>
                 </Row>
@@ -57,14 +57,16 @@ class Leader extends Component {
   }
 }
 
-function mapStateToProps({authedUser, users}) {
+function mapStateToProps({users}, {userKey, answerCount, questionCount, totalCount}) {
     const answeredQuestionsList = []
-    authedUser && Object.keys(users[authedUser].answers).forEach((key) => {
+    userKey && Object.keys(users[userKey].answers).forEach((key) => {
         answeredQuestionsList.push(key)
     })
     return {
-        currentUser : users[authedUser],
-        answeredQuestionsList  
+        currentUser : users[userKey],
+        answerCount,
+        questionCount,
+        totalCount
     }
 }
 
