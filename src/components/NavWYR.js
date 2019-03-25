@@ -35,7 +35,7 @@ class NavWYR extends Component {
               </Nav>
               <Navbar.Text>{(currentUser != null) ? currentUser.name : "Anonymous"}</Navbar.Text>
               {currentUser != null &&
-              <NavLink className='nav-link' to='/'>Logoff</NavLink>
+              <NavLink className='nav-link' to='/logoff'>Logoff</NavLink>
               }
             </Nav>
           </Navbar>

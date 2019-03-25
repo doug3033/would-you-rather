@@ -26,7 +26,16 @@ sleep(10000).then(() => {
     store.dispatch(addQuestion(question))
 })
 
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+sleep(10000).then(() => {
+    store.dispatch(answerQuestion('sarahedo', {'vthrdm985a262al8qx3do': 'optionOne' }))
+})
 */
+
 
 ReactDOM.render(
     <Provider store={store}>

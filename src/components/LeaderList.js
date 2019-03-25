@@ -12,17 +12,17 @@ class LeaderList extends Component {
     
     return(
         <div>
-                    {   
-                        userList.map((user) => {
-                            return (
-                                <Row key={user.id}>
-                                    <Leader key={user.id} userKey={user.id} 
-                                        answerCount={user.answeredQuestionsList.length} 
-                                        questionCount={user.questions.length} 
-                                        totalCount={user.totalScore} />
-                                </Row>
-                            )
-                    })}
+            {   
+                userList.map((user) => {
+                    return (
+                        <Row key={user.id}>
+                            <Leader key={user.id} userKey={user.id} 
+                                answerCount={user.answeredQuestionsList.length} 
+                                questionCount={user.questions.length} 
+                                totalCount={user.totalScore} />
+                        </Row>
+                    )
+            })}
         </div>
     )
   }
