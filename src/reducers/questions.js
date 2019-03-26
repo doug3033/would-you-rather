@@ -20,7 +20,7 @@ export default function questions (state = {}, action) {
             answerQuestion[response].votes = answerQuestion[response].votes.concat(action.userId)
             return {
                 ...state,
-                answerQuestion
+                [answerQuestion.id]: answerQuestion
             }
         default :
             return state

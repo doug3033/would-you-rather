@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addQuestion } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
+import { handleAddQuestion } from '../actions/questions'
 
 class NewQuestion extends Component {
     state = { optionOne: null,
@@ -15,7 +15,7 @@ handleSubmit = (e) => {
 
     const now = Date.now()
 
-    dispatch(addQuestion(
+    dispatch(handleAddQuestion(
       {id: "ccc12345",
         author: authedUser,
         optionOne: { votes: [], text: optionOne },

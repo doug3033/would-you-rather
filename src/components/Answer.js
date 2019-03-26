@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { FormCheck } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { answerQuestion } from '../actions/users'
 import { Redirect } from 'react-router-dom'
+import { handleAnswerQuestion } from '../actions/users'
 
 class Answer extends Component {
     state = { value: null,
@@ -11,7 +11,7 @@ class Answer extends Component {
     handleSubmit = (e) => {
         e.preventDefault() 
         const { authedUser, question, dispatch } = this.props
-        dispatch(answerQuestion(authedUser, {[question.id]: this.state.value})) 
+        dispatch(handleAnswerQuestion(authedUser, question.id, this.state.value)) 
 
         this.setState((prevState) => ({
             value: null,

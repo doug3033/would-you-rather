@@ -11,13 +11,13 @@ class AskList extends Component {
    
   render() {
     const { answeredQuestionList, unansweredQuestionList, users, user } = this.props
-    
     return(
         user ? 
         <div>
             <Tabs defaultActiveKey="UnansweredQuestions">
                 <Tab eventKey="UnansweredQuestions" title="Unanswered Questions">
-                    {   
+                    { 
+                        
                         unansweredQuestionList.map((question) => {
                             return (
                                 <Row key={question.id}>
@@ -46,8 +46,10 @@ class AskList extends Component {
 function mapStateToProps({questions, users}, {user}) {
     const answeredQuestionList = []
     const unansweredQuestionList = []
-    user && Object.keys(user.answers).forEach((key) => {
-        answeredQuestionList.push(questions[key])
+    user && Object.keys(questions).forEach((key) => {
+        if (Object.keys(user.answers).includes(key)) {
+            answeredQuestionList.push(questions[key])
+        }
     })
     questions && user && Object.keys(questions).forEach((key) => {
         if (!Object.keys(user.answers).includes(key)) {
