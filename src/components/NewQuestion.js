@@ -16,7 +16,7 @@ handleSubmit = (e) => {
     const now = Date.now()
 
     dispatch(handleAddQuestion(
-      {id: "ccc12345",
+      {
         author: authedUser,
         optionOne: { votes: [], text: optionOne },
         optionTwo: { votes: [], text: optionTwo },

@@ -12,6 +12,7 @@ class LeaderList extends Component {
     
     return(
         <div>
+            <h1>Leaderboard</h1>
             {   
                 userList.map((user) => {
                     return (

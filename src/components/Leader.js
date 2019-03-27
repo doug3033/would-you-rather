@@ -17,7 +17,7 @@ class Leader extends Component {
         <div>
         <Container>
         <Row>
-            <Col xs={2}>
+            <Col xs={4}>
                 <img 
                     src={currentUser.avatarURL} 
                     alt={`Avatar of ${currentUser.id}`} 
@@ -27,23 +27,23 @@ class Leader extends Component {
             </Col>
             <Col xs={8}>
                 <Row>
-                    <Col>
+                    <Col xs={10}>
                         <Navbar bg="light" expand="lg">
                         <NavbarBrand>{currentUser.name}</NavbarBrand>
                         </Navbar>
                     </Col>
-                    <Col>
-                        <Navbar bg="light" expand="lg">
+                    <Col xs={2}>
+                        <Navbar bg="white" expand="lg">
                         <NavbarBrand>Score</NavbarBrand>
                         </Navbar>
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col xs={10}>
                         Answered Questions {answerCount}<br/>
                         Created Questions {questionCount}
                     </Col>
-                    <Col>
+                    <Col xs={2}>
                         <div className="numberCircle">
                         {totalCount}
                         </div>               
