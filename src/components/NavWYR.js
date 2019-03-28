@@ -23,7 +23,7 @@ class NavWYR extends Component {
               {currentUser != null &&
                 <Fragment>
                 <NavLink className='nav-link' to='/' activeClassName='active'>Home</NavLink>
-                <NavLink className='nav-link' to='/new-question' activeClassName='active'>New Question</NavLink>
+                <NavLink className='nav-link' to='/add' activeClassName='active'>New Question</NavLink>
                 <NavLink className='nav-link' to='/leaderboard' activeClassName='active'>LeaderBoard</NavLink>
                 </Fragment>
               }

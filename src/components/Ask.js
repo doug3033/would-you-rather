@@ -38,7 +38,7 @@ class Ask extends Component {
                         </Button>
                         </Link>
                         :
-                        <Link to={`./questionResults/${question.id}`}>
+                        <Link to={`./question/${question.id}`}>
                         <Button variant="primary" size="lg" block>
                         View Poll
                         </Button>

@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 class QuestionResults extends Component {
    
   render() {
-    const { question, user } = this.props 
+    const { question, user, authedUser } = this.props 
     return(
         <div>
             <Navbar bg="light" expand="lg">
@@ -31,6 +31,20 @@ class QuestionResults extends Component {
                     {question.optionOne.text}
                     </Row>
                     <Row>
+                    <Col id={8}>
+                    </Col>
+                    <Col>
+                    {question.optionOne.votes.includes(authedUser) && 
+                        <img 
+                        src='https://www.digitalyalo.com/sites/default/files/checkmark.png' 
+                        alt='check'
+                        className='avatar'
+                        height="40" width="40"
+                        />
+                    }
+                    </Col>
+                    </Row>
+                    <Row>
                     <progress value={question.optionOne.votes.length} max={question.optionOne.votes.length + question.optionTwo.votes.length} />
                     </Row>
                     <Row>
@@ -38,6 +52,20 @@ class QuestionResults extends Component {
                     </Row>
                     <Row>
                     {question.optionTwo.text}
+                    </Row>
+                    <Row>
+                    <Col id={8}>
+                    </Col>
+                    <Col>
+                    {question.optionTwo.votes.includes(authedUser) && 
+                        <img 
+                        src='https://www.digitalyalo.com/sites/default/files/checkmark.png' 
+                        alt='check'
+                        className='avatar'
+                        height="40" width="40"
+                        />
+                    }
+                    </Col>
                     </Row>
                     <Row>
                     <progress value={question.optionTwo.votes.length} max={question.optionOne.votes.length + question.optionTwo.votes.length} />
@@ -53,11 +81,12 @@ class QuestionResults extends Component {
   }
 }
 
-function mapStateToProps({questions, users}, props) {   
+function mapStateToProps({questions, users, authedUser}, props) {   
     const { questionId } = props.match.params
     return {
         question: questions[questionId],
-        user: users[questions[questionId].author]  
+        user: users[questions[questionId].author],
+        authedUser
     }
 }
 

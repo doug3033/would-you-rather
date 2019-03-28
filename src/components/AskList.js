@@ -57,8 +57,8 @@ function mapStateToProps({questions, users}, {user}) {
         } 
     })
     return {
-        answeredQuestionList,
-        unansweredQuestionList,
+        answeredQuestionList: answeredQuestionList.sort((a, b) => b.timestamp - a.timestamp),
+        unansweredQuestionList: unansweredQuestionList.sort((a, b) => b.timestamp - a.timestamp),
         users
     }
 }

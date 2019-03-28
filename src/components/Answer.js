@@ -27,7 +27,7 @@ class Answer extends Component {
         const { toResults, value } = this.state
         const { question } = this.props
         if (toResults === true) {
-            return (<Redirect to={`/questionResults/${question.id}`} />)
+            return (<Redirect to={`/question/${question.id}`} />)
         }
 
         return(

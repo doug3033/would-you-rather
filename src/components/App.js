@@ -5,7 +5,7 @@ import AskList from './AskList'
 import Answer from './Answer'
 import NewQuestion from './NewQuestion'
 import QuestionResults from './QuestionResults'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LoadingBar from 'react-redux-loading'
 import NavWYR from './NavWYR'
 import Logon from './Logon'
@@ -31,6 +31,7 @@ class App extends Component {
               {this.props.loading === true
               ? null 
             : <div>
+                <Switch>
                 <Route path="/" exact
                   render={() => (
                       currentUser ? 
@@ -38,18 +39,22 @@ class App extends Component {
                       : <Logon />
                     )}       
                  />
-                <Route path='/new-question' component={NewQuestion} />
+                <Route path='/add' component={NewQuestion} />
                 <Route path='/leaderboard' render={({history}) => (
                   currentUser ? <LeaderList /> : history.push('/')
                 )} />
                 <Route path='/answer/:questionId' component={Answer} />
-                <Route path='/questionResults/:questionId' component={QuestionResults} />
+                <Route path='/question/:questionId' component={QuestionResults} />
                 <Route path='/logoff' render={({history}) => {
                   this.props.dispatch(setAuthedUser(null));
                   history.push('/')
                 }} />
 
                 <Route path='/logon' component={Logon} />
+                <Route render={({history}) => (
+                  <div> Page Not Found </div>
+                  )} />
+                </Switch>
               </div>}
           </div>
         </Fragment>
