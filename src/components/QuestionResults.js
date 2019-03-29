@@ -4,12 +4,17 @@ import NavbarBrand from 'react-bootstrap/NavbarBrand';
 import { connect } from 'react-redux'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 
 class QuestionResults extends Component {
    
   render() {
     const { question, user, authedUser } = this.props 
+    if (question === null) {
+        console.log("HERE")
+        return(<Redirect to="/notfound" />)
+    }
     return(
         <div>
             <Navbar bg="light" expand="lg">
@@ -84,8 +89,8 @@ class QuestionResults extends Component {
 function mapStateToProps({questions, users, authedUser}, props) {   
     const { questionId } = props.match.params
     return {
-        question: questions[questionId],
-        user: users[questions[questionId].author],
+        question: questions[questionId] ? questions[questionId] : null,
+        user: questions[questionId] ? users[questions[questionId].author] : null,
         authedUser
     }
 }

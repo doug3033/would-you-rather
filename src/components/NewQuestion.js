@@ -36,9 +36,14 @@ handleChange = ((event) => {
 
 render() {
   const { toRoot } = this.state
+  const { authedUser } = this.props
   if (toRoot === true) {
       return (<Redirect to='/' />)
   } 
+
+  if ( authedUser === null )  {
+      return (<Redirect to='/logon' />)
+  }
 
   return(
       <div>

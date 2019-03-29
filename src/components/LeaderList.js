@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Row from 'react-bootstrap/Row'
 import Leader from './Leader'
+import { Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 
 class LeaderList extends Component {
 
    
   render() {
-    const {  userList } = this.props
+    const {  userList, authedUser } = this.props
+    if ( authedUser === null )  {
+        return (<Redirect to='/logon' />)
+    }
     
     return(
         <div>
@@ -30,7 +34,7 @@ class LeaderList extends Component {
 
 }
 
-function mapStateToProps({users}) {
+function mapStateToProps({users, authedUser}) {
     const userList = []
     Object.keys(users).forEach((key) => {
         userList.push(users[key])
@@ -43,6 +47,7 @@ function mapStateToProps({users}) {
         user.totalScore = user.questions.length + user.answeredQuestionsList.length
     })
     return {
+        authedUser,
         userList: userList
             .sort((a,b) => b.totalScore - a.totalScore)
     }

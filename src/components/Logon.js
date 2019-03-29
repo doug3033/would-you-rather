@@ -24,7 +24,7 @@ class Logon extends Component {
     return (
       <div className="App">
         <Container>
-          <Row>
+          <Row className="bottompad">
             <Col>
               <h2>Welcome to the Would You Rather App.</h2>
               <h3>Please Sign In to Continue.</h3>
@@ -35,7 +35,7 @@ class Logon extends Component {
               <img src={logo} className="App-logo" alt="logo" />
             </Col>
           </Row>
-          <Row>
+          <Row className="toppad">
             <Col>
               <Dropdown>
                 <DropdownToggle variant="success" id="dropdown-basic">

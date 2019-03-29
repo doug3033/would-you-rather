@@ -5,7 +5,7 @@ import AskList from './AskList'
 import Answer from './Answer'
 import NewQuestion from './NewQuestion'
 import QuestionResults from './QuestionResults'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import LoadingBar from 'react-redux-loading'
 import NavWYR from './NavWYR'
 import Logon from './Logon'
@@ -50,9 +50,14 @@ class App extends Component {
                   history.push('/')
                 }} />
 
-                <Route path='/logon' component={Logon} />
-                <Route render={({history}) => (
-                  <div> Page Not Found </div>
+                <Route path='/logon' render={({history}) => (
+                  currentUser ? 
+                  history.push('/')
+                  : <Logon />
+                )}       
+                />
+                <Route path='/notfound' render={({history}) => (
+                  <div> Page Not Found. Click <Link to="/logon">here</Link> to logon. </div>
                   )} />
                 </Switch>
               </div>}
