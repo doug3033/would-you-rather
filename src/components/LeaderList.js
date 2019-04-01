@@ -7,34 +7,34 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class LeaderList extends Component {
 
-   
-  render() {
-    const {  userList, authedUser } = this.props
-    if ( authedUser === null )  {
-        return (<Redirect to='/logon' />)
+
+    render() {
+        const { userList, authedUser } = this.props
+        if (authedUser === null) {
+            return (<Redirect to='/logon' />)
+        }
+
+        return (
+            <div>
+                <h1>Leaderboard</h1>
+                {
+                    userList.map((user) => {
+                        return (
+                            <Row key={user.id}>
+                                <Leader key={user.id} userKey={user.id}
+                                    answerCount={user.answeredQuestionsList.length}
+                                    questionCount={user.questions.length}
+                                    totalCount={user.totalScore} />
+                            </Row>
+                        )
+                    })}
+            </div>
+        )
     }
-    
-    return(
-        <div>
-            <h1>Leaderboard</h1>
-            {   
-                userList.map((user) => {
-                    return (
-                        <Row key={user.id}>
-                            <Leader key={user.id} userKey={user.id} 
-                                answerCount={user.answeredQuestionsList.length} 
-                                questionCount={user.questions.length} 
-                                totalCount={user.totalScore} />
-                        </Row>
-                    )
-            })}
-        </div>
-    )
-  }
 
 }
 
-function mapStateToProps({users, authedUser}) {
+function mapStateToProps({ users, authedUser }) {
     const userList = []
     Object.keys(users).forEach((key) => {
         userList.push(users[key])
@@ -49,7 +49,7 @@ function mapStateToProps({users, authedUser}) {
     return {
         authedUser,
         userList: userList
-            .sort((a,b) => b.totalScore - a.totalScore)
+            .sort((a, b) => b.totalScore - a.totalScore)
     }
 }
 

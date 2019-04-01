@@ -17,62 +17,68 @@ class Logon extends Component {
     this.props.dispatch(setAuthedUser(id))
   }
 
+  getLogonContainer = () => {
+    const { users } = this.props
+    return(
+    <Container>
+    <Row className="bottompad">
+      <Col>
+        <h2>Welcome to the Would You Rather App.</h2>
+        <h3>Please Sign In to Continue.</h3>
+      </Col>
+    </Row>
+    <Row>
+      <Col>
+        <img src={logo} className="App-logo" alt="logo" />
+      </Col>
+    </Row>
+    <Row className="toppad">
+      <Col>
+        <Dropdown>
+          <DropdownToggle variant="success" id="dropdown-basic">
+            Sign On
+          </DropdownToggle>
+
+          <DropdownMenu>
+            {users.map((user) => {
+              return (
+                <DropdownItem id={user.id} key={user.id} onClick={(e) => this.handleAuthUserSelected(e, user.id)}>
+                  <span>
+                    <img
+                      src={user.avatarURL}
+                      alt={`Avatar of ${user.id}`}
+                      className='avatar'
+                      height="30" width="30"
+                    />
+                    {` ${user.name}`}
+                  </span>
+                </DropdownItem>
+              )
+            })}
+          </DropdownMenu>
+        </Dropdown>
+      </Col>
+    </Row>
+  </Container>
+  )
+          }
 
 
   render() {
-    const { users } = this.props
     return (
       <div className="App">
-        <Container>
-          <Row className="bottompad">
-            <Col>
-              <h2>Welcome to the Would You Rather App.</h2>
-              <h3>Please Sign In to Continue.</h3>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <img src={logo} className="App-logo" alt="logo" />
-            </Col>
-          </Row>
-          <Row className="toppad">
-            <Col>
-              <Dropdown>
-                <DropdownToggle variant="success" id="dropdown-basic">
-                  Sign On
-                </DropdownToggle>
-              
-                <DropdownMenu>
-                  {users.map((user) => {
-                    return(
-                      <DropdownItem id={user.id} key={user.id} onClick={(e)=>this.handleAuthUserSelected(e,user.id)}>
-                        <span>
-                          <img 
-                            src={user.avatarURL} 
-                            alt={`Avatar of ${user.id}`} 
-                            className='avatar'
-                            height="30" width="30"
-                            />
-                          {` ${user.name}`}
-                        </span>
-                      </DropdownItem>
-                    )  
-                  })}
-                </DropdownMenu>
-              </Dropdown>
-            </Col>
-          </Row>
-        </Container>
+        {this.getLogonContainer()}
       </div>
     );
   }
 }
 
-function mapStateToProps({users}) {
-    return {
-        users: Object.keys(users).map((key) => {
-          return(users[key])})       
-    }
+function mapStateToProps({ users }) {
+  return {
+    users: Object.keys(users).map((key) => {
+      return (users[key])
+    })
+  }
 }
 
 export default connect(mapStateToProps)(Logon)

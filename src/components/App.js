@@ -28,36 +28,36 @@ class App extends Component {
           <LoadingBar />
           <NavWYR />
           <div className='container'>
-              {this.props.loading === true
-              ? null 
-            : <div>
+            {this.props.loading === true
+              ? null
+              : <div>
                 <Switch>
-                <Route path="/" exact
-                  render={() => (
-                      currentUser ? 
-                      <AskList  user={this.props.users[currentUser]} />
-                      : <Logon />
-                    )}       
-                 />
-                <Route path='/add' component={NewQuestion} />
-                <Route path='/leaderboard' render={({history}) => (
-                  currentUser ? <LeaderList /> : history.push('/')
-                )} />
-                <Route path='/answer/:questionId' component={Answer} />
-                <Route path='/question/:questionId' component={QuestionResults} />
-                <Route path='/logoff' render={({history}) => {
-                  this.props.dispatch(setAuthedUser(null));
-                  history.push('/')
-                }} />
+                  <Route path="/" exact
+                    render={() => (
+                      currentUser ?
+                        <AskList user={this.props.users[currentUser]} />
+                        : <Logon />
+                    )}
+                  />
+                  <Route path='/add' component={NewQuestion} />
+                  <Route path='/leaderboard' render={({ history }) => (
+                    currentUser ? <LeaderList /> : history.push('/')
+                  )} />
+                  <Route path='/answer/:questionId' component={Answer} />
+                  <Route path='/question/:questionId' component={QuestionResults} />
+                  <Route path='/logoff' render={({ history }) => {
+                    this.props.dispatch(setAuthedUser(null));
+                    history.push('/')
+                  }} />
 
-                <Route path='/logon' render={({history}) => (
-                  currentUser ? 
-                  history.push('/')
-                  : <Logon />
-                )}       
-                />
-                <Route path='/notfound' render={({history}) => (
-                  <div> Page Not Found. Click <Link to="/logon">here</Link> to logon. </div>
+                  <Route path='/logon' render={({ history }) => (
+                    currentUser ?
+                      history.push('/')
+                      : <Logon />
+                  )}
+                  />
+                  <Route path='/notfound' render={({ history }) => (
+                    <div> Page Not Found. Click <Link to="/logon">here</Link> to logon. </div>
                   )} />
                 </Switch>
               </div>}
@@ -69,12 +69,12 @@ class App extends Component {
 }
 
 function mapStateToProps({ authedUser, users }) {
-    return {
-      loading: users === null,
-      users,
-      currentUser : authedUser
-    }
+  return {
+    loading: users === null,
+    users,
+    currentUser: authedUser
   }
+}
 
 
 export default connect(mapStateToProps)(App)

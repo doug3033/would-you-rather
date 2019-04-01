@@ -11,43 +11,43 @@ import '../App.css'
 
 
 class NavWYR extends Component {
-   
+
   render() {
-    const { currentUser } = this.props 
-    return(
-        <div>
-          <Navbar bg='primary' variant='dark'>
-            <NavbarBrand>Would You Rather?</NavbarBrand>       
-            <Nav className='mr-auto'>
-            
-              {currentUser != null &&
-                <Fragment>
+    const { currentUser } = this.props
+    return (
+      <div>
+        <Navbar bg='primary' variant='dark'>
+          <NavbarBrand>Would You Rather?</NavbarBrand>
+          <Nav className='mr-auto'>
+
+            {currentUser != null &&
+              <Fragment>
                 <NavLink className='nav-link' to='/' activeClassName='active'>Home</NavLink>
                 <NavLink className='nav-link' to='/add' activeClassName='active'>New Question</NavLink>
                 <NavLink className='nav-link' to='/leaderboard' activeClassName='active'>LeaderBoard</NavLink>
-                </Fragment>
-              }
+              </Fragment>
+            }
 
-            </Nav>
+          </Nav>
+          <Nav>
             <Nav>
-              <Nav>
               <NavItem></NavItem>
-              </Nav>
-              <Navbar.Text>{(currentUser != null) ? currentUser.name : "Anonymous"}</Navbar.Text>
-              {currentUser != null &&
-              <NavLink className='nav-link' to='/logoff'>Logoff</NavLink>
-              }
             </Nav>
-          </Navbar>
-        </div>
+            <Navbar.Text>{(currentUser != null) ? currentUser.name : "Anonymous"}</Navbar.Text>
+            {currentUser != null &&
+              <NavLink className='nav-link' to='/logoff'>Logoff</NavLink>
+            }
+          </Nav>
+        </Navbar>
+      </div>
     )
   }
 }
 
-function mapStateToProps({authedUser, users}) {
-    return {
-        currentUser : authedUser ? users[authedUser] : null      
-    }
+function mapStateToProps({ authedUser, users }) {
+  return {
+    currentUser: authedUser ? users[authedUser] : null
+  }
 }
 
 

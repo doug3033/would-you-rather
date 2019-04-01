@@ -1,11 +1,8 @@
-import {  _saveQuestionAnswer } from '../util/_DATA.js'
+import { _saveQuestionAnswer } from '../util/_DATA.js'
 import { showLoading, hideLoading } from 'react-redux-loading'
+import { RECEIVE_USERS, ANSWER_QUESTION } from './types'
 
-export const RECEIVE_USERS = 'RECEIVE_USERS'
-export const ANSWER_QUESTION = 'ANSWER_QUESTION'
-
-
-export function receiveUsers (users) {
+export function receiveUsers(users) {
     return {
         type: RECEIVE_USERS,
         users
@@ -13,7 +10,7 @@ export function receiveUsers (users) {
 }
 
 
-function answerQuestion (userId,  answer) {
+function answerQuestion(userId, answer) {
     return {
         type: ANSWER_QUESTION,
         userId,
@@ -22,12 +19,12 @@ function answerQuestion (userId,  answer) {
 }
 
 export function handleAnswerQuestion(userId, questionId, answer) {
-    return(dispatch, getState) => {
+    return (dispatch, getState) => {
 
         dispatch(showLoading())
         console.log('the answer is: ' + userId)
-        return _saveQuestionAnswer({ authedUser: userId, qid: questionId, answer: answer})
-            .then((response ) =>dispatch(answerQuestion( userId, {[questionId]: answer})))
+        return _saveQuestionAnswer({ authedUser: userId, qid: questionId, answer: answer })
+            .then((response) => dispatch(answerQuestion(userId, { [questionId]: answer })))
             .then(() => dispatch(hideLoading()))
     }
 }
